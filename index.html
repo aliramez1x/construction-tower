@@ -151,15 +151,23 @@ h2.h-title em{font-style:normal;color:var(--red);}
 .hero-media::after{content:"";position:absolute;inset:0;background:var(--overlay);}
 .hero-grid{position:absolute;inset:0;z-index:1;background-image:linear-gradient(var(--line-on-strong) 1px, transparent 1px),linear-gradient(90deg, var(--line-on-strong) 1px, transparent 1px);background-size:64px 64px;mask-image:linear-gradient(to bottom, transparent, black 25%, black 65%, transparent);}
 .hero-logo-watermark{
-  position:absolute;top:50%;left:2%;transform:translateY(-50%);
+  position:absolute;top:50%;left:5%;transform:translateY(-50%); /* نقلناه لليسار بدلاً من اليمين */
   width:min(560px,72vw);aspect-ratio:849/724;z-index:1;
-  background-image:var(--logo-mark-current);background-repeat:no-repeat;background-position:left;background-size:contain;
+  background-image:var(--logo-mark-current);background-repeat:no-repeat;background-position:center;background-size:contain;
   opacity:0;filter:drop-shadow(0 30px 60px rgba(0,0,0,.35));
   animation:logoIn 1.6s var(--ease) .3s forwards;
 }
-@keyframes logoIn{from{opacity:0;transform:translateY(-50%) scale(.92);}to{opacity:.9;transform:translateY(-50%) scale(1);}}
-@media (max-width:900px){.hero-logo-watermark{width:min(340px,60vw);opacity:0;right:50%;transform:translate(50%,-50%);top:32%;}
-@keyframes logoIn{from{opacity:0;transform:translate(50%,-50%) scale(.92);}to{opacity:.5;transform:translate(50%,-50%) scale(1);}}}
+@keyframes logoIn{
+  from{opacity:0;transform:translateY(-50%) scale(.92);}
+  to{opacity:.15;transform:translateY(-50%) scale(1);} /* تقليل الشفافية إلى 15% ليكون علامة مائية حقيقية */
+}
+@media (max-width:900px){
+  .hero-logo-watermark{width:min(340px,60vw);opacity:0;left:50%;right:auto;transform:translate(-50%,-50%);top:40%;}
+  @keyframes logoIn{
+    from{opacity:0;transform:translate(-50%,-50%) scale(.92);}
+    to{opacity:.1;transform:translate(-50%,-50%) scale(1);} /* شفافية 10% في الشاشات الصغيرة */
+  }
+}
 .hero-inner{position:relative;z-index:2;width:100%;padding:90px 0 56px;}
 .play-tag{display:inline-flex;align-items:center;gap:12px;background:color-mix(in srgb, var(--bg-strong) 55%, transparent);border:1px solid var(--line-on-strong);backdrop-filter:blur(6px);padding:10px 16px 10px 10px;border-radius:40px;margin-bottom:24px;color:var(--text-strong);font-size:13px;font-weight:700;}
 .play-tag .dot{width:30px;height:30px;border-radius:50%;background:var(--red);display:flex;align-items:center;justify-content:center;}
